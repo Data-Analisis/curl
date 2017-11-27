@@ -39,6 +39,10 @@ matrix:
           dist: trusty
           env: T=normal BROTLI=yes
         - os: linux
+          compiler: gcc
+          dist: trusty
+          env: T=normal BORINGSSL=yes -C="--with-ssl=$HOME/boringssl"
+        - os: linux
           compiler: clang
           dist: trusty
           env: T=debug
@@ -107,6 +111,19 @@ before_script:
                   make &&
                   sudo make install
               )
+          fi
+          if [ "$TRAVIS_OS_NAME" = linux -a "$BORINGSSL" ]; then
+            git clone https://boringssl.googlesource.com/boringssl
+            cd boringssl
+            mkdir build
+            cd build
+            cmake -DCMAKE_INSTALL_PREFIX:PATH=$HOME/build-boringssl ..
+            make
+            cd ..
+            mkdir lib
+            cd lib
+            ln -s ../build/crypto/libcrypto.a .
+            ln -s ../build/ssl/libssl.a .
           fi
 
 script:
