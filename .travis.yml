@@ -124,7 +124,6 @@ before_script:
             cd lib &&
             ln -s ../build/crypto/libcrypto.a . &&
             ln -s ../build/ssl/libssl.a . )
-            export LIBS=-lpthread
           fi
 
 script:
@@ -152,7 +151,7 @@ script:
     - |
         set -eo pipefail
         if [ "$T" = "normal" ]; then
-             ./configure --enable-warnings --enable-werror $C
+             LIBS=-lpthread" ./configure --enable-warnings --enable-werror $C
              make && make examples
              make test-nonflaky
         fi
