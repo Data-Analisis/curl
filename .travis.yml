@@ -113,11 +113,11 @@ before_script:
               )
           fi
           if [ "$TRAVIS_OS_NAME" = linux -a "$BORINGSSL" ]; then
-            (git clone https://boringssl.googlesource.com/boringssl &&
+            (git clone --depth=1 https://boringssl.googlesource.com/boringssl &&
             cd boringssl &&
             mkdir build &&
             cd build &&
-            cmake -DCMAKE_INSTALL_PREFIX:PATH=$HOME/build-boringssl .. &&
+            cmake -DCMAKE_BUILD_TYPE=release .. &&
             make &&
             cd .. &&
             mkdir lib &&
@@ -151,7 +151,7 @@ script:
     - |
         set -eo pipefail
         if [ "$T" = "normal" ]; then
-             LIBS=-lpthread" ./configure --enable-warnings --enable-werror $C
+             LIBS=-lpthread ./configure --enable-warnings --enable-werror $C
              make && make examples
              make test-nonflaky
         fi
