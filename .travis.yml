@@ -113,17 +113,17 @@ before_script:
               )
           fi
           if [ "$TRAVIS_OS_NAME" = linux -a "$BORINGSSL" ]; then
-            git clone https://boringssl.googlesource.com/boringssl
-            cd boringssl
-            mkdir build
-            cd build
-            cmake -DCMAKE_INSTALL_PREFIX:PATH=$HOME/build-boringssl ..
-            make
-            cd ..
-            mkdir lib
-            cd lib
-            ln -s ../build/crypto/libcrypto.a .
-            ln -s ../build/ssl/libssl.a .
+            (git clone https://boringssl.googlesource.com/boringssl &&
+            cd boringssl &&
+            mkdir build &&
+            cd build &&
+            cmake -DCMAKE_INSTALL_PREFIX:PATH=$HOME/build-boringssl .. &&
+            make &&
+            cd .. &&
+            mkdir lib &&
+            cd lib &&
+            ln -s ../build/crypto/libcrypto.a . &&
+            ln -s ../build/ssl/libssl.a . )
           fi
 
 script:
