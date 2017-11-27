@@ -123,7 +123,8 @@ before_script:
             mkdir lib &&
             cd lib &&
             ln -s ../build/crypto/libcrypto.a . &&
-            ln -s ../build/ssl/libssl.a . )
+            ln -s ../build/ssl/libssl.a . &&
+            echo "BoringSSL lib dir: "`pwd` )
           fi
 
 script:
