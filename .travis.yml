@@ -113,7 +113,8 @@ before_script:
               )
           fi
           if [ "$TRAVIS_OS_NAME" = linux -a "$BORINGSSL" ]; then
-            (git clone --depth=1 https://boringssl.googlesource.com/boringssl &&
+            (cd $HOME &&
+            git clone --depth=1 https://boringssl.googlesource.com/boringssl &&
             cd boringssl &&
             mkdir build &&
             cd build &&
