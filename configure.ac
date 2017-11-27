@@ -1764,6 +1764,10 @@ if test -z "$ssl_backends" -o "x$OPT_SSL" != xno &&
                     SSL_get_shutdown \
                     SSLv2_client_method )
 
+    AC_MSG_NOTICE([LIBS is $LIBS])
+    AC_MSG_NOTICE([LDFLAGS is $LDFLAGS])
+    AC_MSG_NOTICE([CFLAGS is $CFLAGS])
+    AC_MSG_NOTICE([CPPFLAGS is $CPPFLAGS])
     AC_MSG_CHECKING([for BoringSSL])
     AC_COMPILE_IFELSE([
         AC_LANG_PROGRAM([[
