@@ -124,6 +124,7 @@ before_script:
             cd lib &&
             ln -s ../build/crypto/libcrypto.a . &&
             ln -s ../build/ssl/libssl.a . )
+            export LIBS=-lpthread
           fi
 
 script:
