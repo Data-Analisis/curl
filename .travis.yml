@@ -25,19 +25,19 @@ matrix:
         - os: linux
           compiler: gcc
           dist: trusty
-          env: T=normal C=--with-gssapi
+          env: T=normal C="--with-gssapi --enable-werror"
         - os: linux
           compiler: gcc
           dist: trusty
-          env: T=normal C="--disable-http --disable-smtp --disable-imap"
+          env: T=normal C="--disable-http --disable-smtp --disable-imap --enable-werror"
         - os: linux
           compiler: gcc
           dist: trusty
-          env: T=normal C=--enable-ares
+          env: T=normal C="--enable-ares --enable-werror"
         - os: linux
           compiler: gcc
           dist: trusty
-          env: T=normal BROTLI=yes
+          env: T=normal BROTLI=yes C="--enable-werror"
         - os: linux
           compiler: gcc
           dist: trusty
@@ -63,7 +63,7 @@ matrix:
           env: T=debug C="--without-ssl --with-darwinssl --with-libmetalink"
         - os: osx
           compiler: clang
-          env: T=normal
+          env: T=normal C="--enable-werror"
         - os: linux
           compiler: gcc
           dist: trusty
@@ -153,7 +153,7 @@ script:
     - |
         set -eo pipefail
         if [ "$T" = "normal" ]; then
-             LIBS=-lpthread ./configure --enable-warnings --enable-werror $C
+             LIBS=-lpthread ./configure --enable-warnings $C
              make && make examples
              make test-nonflaky
         fi
