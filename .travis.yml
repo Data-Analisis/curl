@@ -126,7 +126,7 @@ before_script:
             ln -s ../build/crypto/libcrypto.so . &&
             ln -s ../build/ssl/libssl.so . &&
             echo "BoringSSL lib dir: "`pwd` &&
-            export LIBS=-lpthread
+            export LIBS=-lpthread )
           fi
 
 script:
