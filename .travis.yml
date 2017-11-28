@@ -37,11 +37,11 @@ matrix:
         - os: linux
           compiler: gcc
           dist: trusty
-          env: T=normal BROTLI=yes C="--enable-werror" LD_LIBRARY_PATH=/home/travis/boringssl/lib
+          env: T=normal BROTLI=yes C="--enable-werror"
         - os: linux
           compiler: gcc
           dist: trusty
-          env: T=normal BORINGSSL=yes -C="--with-ssl=$HOME/boringssl"
+          env: T=normal BORINGSSL=yes -C="--with-ssl=$HOME/boringssl" LD_LIBRARY_PATH=/home/travis/boringssl/lib
         - os: linux
           compiler: clang
           dist: trusty
