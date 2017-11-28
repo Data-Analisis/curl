@@ -37,7 +37,7 @@ matrix:
         - os: linux
           compiler: gcc
           dist: trusty
-          env: T=normal BROTLI=yes C="--enable-werror"
+          env: T=normal BROTLI=yes C="--enable-werror" LD_LIBRARY_PATH=/home/travis/boringssl/lib
         - os: linux
           compiler: gcc
           dist: trusty
@@ -126,8 +126,7 @@ before_script:
             ln -s ../build/crypto/libcrypto.so . &&
             ln -s ../build/ssl/libssl.so . &&
             echo "BoringSSL lib dir: "`pwd` &&
-            export LIBS=-lpthread &&
-            export LD_LIBRARY_PATH=$HOME/boringssl/lib )
+            export LIBS=-lpthread
           fi
 
 script:
