@@ -118,14 +118,16 @@ before_script:
             cd boringssl &&
             mkdir build &&
             cd build &&
-            cmake -DCMAKE_BUILD_TYPE=release .. &&
+            cmake -DCMAKE_BUILD_TYPE=release -DBUILD_SHARED_LIBS=1 .. &&
             make &&
             cd .. &&
             mkdir lib &&
             cd lib &&
-            ln -s ../build/crypto/libcrypto.a . &&
-            ln -s ../build/ssl/libssl.a . &&
-            echo "BoringSSL lib dir: "`pwd` )
+            ln -s ../build/crypto/libcrypto.so . &&
+            ln -s ../build/ssl/libssl.so . &&
+            echo "BoringSSL lib dir: "`pwd` &&
+            export LIBS=-lpthread &&
+            export LD_LIBRARY_PATH=$HOME/boringssl/lib )
           fi
 
 script:
@@ -153,7 +155,7 @@ script:
     - |
         set -eo pipefail
         if [ "$T" = "normal" ]; then
-             LIBS=-lpthread ./configure --enable-warnings $C
+             ./configure --enable-warnings $C
              make && make examples
              make test-nonflaky
         fi
